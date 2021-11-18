@@ -200,3 +200,17 @@ const missing_students = [
 		"image": null,
 	},
 ];
+
+
+const rightAnswerEl = document.querySelector("#rightAnswer");
+const wrongAnswerEl = document.querySelector(".wrongAnswer");
+const imgHolderEl = document.querySelector("#imgSpan");
+
+const renderStudents = () => {
+
+	students.forEach((student, i) => {
+
+	}
+	)
+
+}
