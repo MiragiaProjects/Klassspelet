@@ -18,6 +18,10 @@ Visa vilka man gissade fel på och vilket som var rätt svar. Antingen genom att
 Håll reda på senaste resultat och vid varje ny gissning visa om man förbättrade eller försämrade sig denna gången
 */
 
+const rightAnswerEl = document.querySelector("#rightAnswer");
+const wrongAnswerEl = document.querySelector(".wrongAnswer");
+const cardHolderEl = document.querySelector("#cardHolder");
+
 
 const students = [
 	{
@@ -202,15 +206,94 @@ const missing_students = [
 ];
 
 
-const rightAnswerEl = document.querySelector("#rightAnswer");
-const wrongAnswerEl = document.querySelector(".wrongAnswer");
-const imgHolderEl = document.querySelector("#imgSpan");
+const shuffleArray = array => {
+	for (let i = array.length - 1; i > 0; i--) {
+	  const j = Math.floor(Math.random() * (i + 1));
+	  const temp = array[i];
+	  array[i] = array[j];
+	  array[j] = temp;
+	}
+  };
+
+  shuffleArray(students);
+  
+  console.log(students);
+
+  
 
 const renderStudents = () => {
 
-	students.forEach((student, i) => {
+	students.forEach((student) => {
+		const tempArray = [];
 
+		//tempArray.push(student.name);
+
+		let a = student.name;
+		let b = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+		let c = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+		let d = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+
+		
+			
+		
+		while (a == b || a == c || b == c || a == d || b == d || c == d) {
+			if (a == b ) {
+				b = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+			}
+			if (c == a) {
+				c = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+			}
+			if (c == b) {
+				c = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+			}
+			if (d == a) {
+				d = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+			}
+			if (d == b) {
+				d = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+			}
+			if (d == c) {
+				d = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
+			}
+			
+		};
+
+		tempArray.push(a , b , c , d);
+
+		console.log(tempArray);
+
+		shuffleArray(tempArray);
+
+		console.log(tempArray);
+
+			//testArray.push(students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name']);
+			//console.log(a + " " + b + " " + c + " " + d);
+			
+			
+	
+	
+		cardHolderEl.innerHTML += `
+		<div class="card mb-3">
+            <span id="imgSpan">
+                <img src="${student.image}" class="card-img-top" alt="a classmate">
+            </span>
+                <div class="card-body">
+                    <h5 class="card-title">Who dis?</h5>
+                    <button type="button" class="btn btn-primary">${tempArray[0]}</button>
+                    <button type="button" class="btn btn-primary">${tempArray[1]}</button>
+                    <button type="button" class="btn btn-primary">${tempArray[2]}</button>
+                    <button type="button" class="btn btn-primary">${tempArray[3]}</button>
+            </div>
+          </div>
+		  `
 	}
 	)
 
-}
+};
+
+renderStudents();
+
+
+
+  
+  
