@@ -1,27 +1,6 @@
-/*
-Betygskriterier
 
-Godkänt
 
-Följer strukturen och upplägget ovan
-Den ursprungliga array:en förblir oförändrad
-Visar resultat med antal rätt samt totalt antal frågor (t.ex. 16/20 rätt om man fick 16 rätt på 20 frågor)
-
-Väl Godkänt
-
-Använda Array Filter & Array Map
-
-Slumpa ordningen som bilderna kommer i
-
-Visa vilka man gissade fel på och vilket som var rätt svar. Antingen genom att i listan visa vad man gissade på och vad som var rätt svar, eller i en ny lista under resultatet visa foto + namn på de man gissade fel på
-
-Håll reda på senaste resultat och vid varje ny gissning visa om man förbättrade eller försämrade sig denna gången
-*/
-
-const rightAnswerEl = document.querySelector("#rightAnswer");
-const wrongAnswerEl = document.querySelector(".wrongAnswer");
 const cardHolderEl = document.querySelector("#cardHolder");
-
 
 const students = [
 	{
@@ -214,13 +193,15 @@ const shuffleArray = array => {
 	  array[j] = temp;
 	}
   };
-
+ // Suffling the student array
   shuffleArray(students);
   
-  console.log(students);
+  //console.log(students);
 
-  
+  // Declared outside of loop so I can reach whats stored in a
+  const aStudents = [];
 
+// writing out students with card
 const renderStudents = () => {
 
 	students.forEach((student) => {
@@ -228,14 +209,16 @@ const renderStudents = () => {
 
 		//tempArray.push(student.name);
 
+		// the right answer gets saved in a
 		let a = student.name;
+		// the other 3 are the other names that are wrong
 		let b = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
 		let c = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
 		let d = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
 
 		
 			
-		
+		//making sure that the same name will not appear again
 		while (a == b || a == c || b == c || a == d || b == d || c == d) {
 			if (a == b ) {
 				b = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
@@ -257,21 +240,21 @@ const renderStudents = () => {
 			}
 			
 		};
-
+		// pushing in all the choises in an array
 		tempArray.push(a , b , c , d);
 
-		console.log(tempArray);
-
+		//console.log(tempArray);
+		// shuffling the 4 students som taht they dont end up on the same button
 		shuffleArray(tempArray);
 
-		console.log(tempArray);
+		//console.log(tempArray);
 
 			//testArray.push(students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name']);
 			//console.log(a + " " + b + " " + c + " " + d);
 			
 			
 	
-	
+		// Writing out the card with img and button with different names
 		cardHolderEl.innerHTML += `
 		<div class="card mb-3">
             <span id="imgSpan">
@@ -279,21 +262,68 @@ const renderStudents = () => {
             </span>
                 <div class="card-body">
                     <h5 class="card-title">Who dis?</h5>
-                    <button type="button" class="btn btn-primary">${tempArray[0]}</button>
-                    <button type="button" class="btn btn-primary">${tempArray[1]}</button>
-                    <button type="button" class="btn btn-primary">${tempArray[2]}</button>
-                    <button type="button" class="btn btn-primary">${tempArray[3]}</button>
-            </div>
-          </div>
-		  `
+					<div class="buttonHolder">
+                    	<button type="button" class="btn btn-primary">${tempArray[0]}</button>
+                    	<button type="button" class="btn btn-primary">${tempArray[1]}</button>
+                    	<button type="button" class="btn btn-primary">${tempArray[2]}</button>
+                    	<button type="button" class="btn btn-primary">${tempArray[3]}</button>
+					</div>
+            	</div>
+        </div>
+		  `	
 	}
 	)
 
 };
-
+ // Calls the function to print ou students on cards
 renderStudents();
 
+const buttonHolderEl = document.querySelectorAll('.buttonHolder');
+const buttons = document.querySelectorAll('.btn');
 
 
-  
+console.log(buttonHolderEl);
+
+// Score to see how many you guessed right on
+let score = 0;
+
+// A counter to see if the name you clicked is the same name on the button
+let k = 0;
+ 
+// Trying to make an eventlistener that will see if the name you clicked match 
+// the array of names in students after shuffled
+buttonHolderEl.forEach(holder => {
+	holder.addEventListener('click', e => {
+
+	e.preventDefault;
+
+	if (e.target.tagName == "BUTTON") {
+
+		if (e.target.innerHTML == students[0 + k]['name']) {
+		k++;
+		score++;
+		
+		// TODO
+		// Make a removeEventListener to remove target element parent
+		
+		} else {
+
+		k++
+
+		// TODO
+		// Make a removeEventListener to remove target element parent
+
+
+		}
+	
+	}
+	
+	if (k == students.length) {
+		alert("Du hade " + score + " rätt av " + k)
+	}
+
+	
+ })
+} )
+ 
   
