@@ -256,20 +256,22 @@ const renderStudents = () => {
 	
 		// Writing out the card with img and button with different names
 		cardHolderEl.innerHTML += `
-		<div class="card mb-3">
-            <span id="imgSpan">
-                <img src="${student.image}" class="card-img-top" alt="a classmate">
-            </span>
-                <div class="card-body">
-                    <h5 class="card-title">Who dis?</h5>
-					<div class="buttonHolder">
-                    	<button type="button" class="btn btn-primary">${tempArray[0]}</button>
-                    	<button type="button" class="btn btn-primary">${tempArray[1]}</button>
-                    	<button type="button" class="btn btn-primary">${tempArray[2]}</button>
-                    	<button type="button" class="btn btn-primary">${tempArray[3]}</button>
-					</div>
-            	</div>
-        </div>
+		<div class="col-md-3 col-lg-4">
+			<div class="card mb-3 ">
+            	<span id="imgSpan">
+                	<img src="${student.image}" class="card-img-top" alt="a classmate">
+            	</span>
+                	<div class="card-body">
+                    	<h5 class="card-title">Who dis?</h5>
+						<div class="buttonHolder">
+                    		<button type="button" class="btn btn-primary">${tempArray[0]}</button>
+                    		<button type="button" class="btn btn-primary">${tempArray[1]}</button>
+                    		<button type="button" class="btn btn-primary">${tempArray[2]}</button>
+                    		<button type="button" class="btn btn-primary">${tempArray[3]}</button>
+						</div>
+            		</div>
+        	</div>
+		</div>
 		  `	
 	}
 	)
@@ -298,10 +300,12 @@ buttonHolderEl.forEach(holder => {
 	e.preventDefault;
 
 	if (e.target.tagName == "BUTTON") {
+		
 
 		if (e.target.innerHTML == students[0 + k]['name']) {
 		k++;
 		score++;
+		
 		
 		// TODO
 		// Make a removeEventListener to remove target element parent
@@ -309,15 +313,23 @@ buttonHolderEl.forEach(holder => {
 		} else {
 
 		k++
-
+		
 		// TODO
 		// Make a removeEventListener to remove target element parent
 
 
 		}
-	
+
 	}
 	
+		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
+			buttonEl.setAttribute('disabled',true);
+		})
+	
+			//'button').setAttribute('disabled',true);
+
+	console.log(e.target.parentElement);
+
 	if (k == students.length) {
 		alert("Du hade " + score + " rätt av " + k)
 	}
