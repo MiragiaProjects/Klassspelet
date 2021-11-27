@@ -256,7 +256,7 @@ const renderStudents = () => {
 	
 		// Writing out the card with img and button with different names
 		cardHolderEl.innerHTML += `
-		<div class="col-md-3 col-lg-4">
+		<div class="col-md-6 col-lg-4">
 			<div class="card mb-3 ">
             	<span id="imgSpan">
                 	<img src="${student.image}" class="card-img-top" alt="a classmate">
