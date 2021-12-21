@@ -201,16 +201,18 @@ const shuffleArray = array => {
   // Declared outside of loop so I can reach whats stored in a
   const aStudents = [];
 
+let k = 0;
+let score = 0;
 // writing out students with card
 const renderStudents = () => {
 
-	students.forEach((student) => {
+	//students.forEach((student) => {
 		const tempArray = [];
 
 		//tempArray.push(student.name);
 
 		// the right answer gets saved in a
-		let a = student.name;
+		let a = students[k]['name'];
 		// the other 3 are the other names that are wrong
 		let b = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
 		let c = students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name'];
@@ -259,7 +261,7 @@ const renderStudents = () => {
 		<div class="col-md-6 col-lg-4">
 			<div class="card mb-3 ">
             	<span id="imgSpan">
-                	<img src="${student.image}" class="card-img-top" alt="a classmate">
+                	<img src="${students[k]['image']}" class="card-img-top" alt="a classmate">
             	</span>
                 	<div class="card-body">
                     	<h5 class="card-title">Who dis?</h5>
@@ -273,28 +275,11 @@ const renderStudents = () => {
         	</div>
 		</div>
 		  `	
-	}
-	)
 
-};
- // Calls the function to print ou students on cards
-renderStudents();
+		const buttonHolderEl = document.querySelectorAll('.buttonHolder');
+		const buttons = document.querySelectorAll('.btn');
 
-const buttonHolderEl = document.querySelectorAll('.buttonHolder');
-const buttons = document.querySelectorAll('.btn');
-
-
-console.log(buttonHolderEl);
-
-// Score to see how many you guessed right on
-let score = 0;
-
-// A counter to see if the name you clicked is the same name on the button
-let k = 0;
- 
-// Trying to make an eventlistener that will see if the name you clicked match 
-// the array of names in students after shuffled
-buttonHolderEl.forEach(holder => {
+		buttonHolderEl.forEach(holder => {
 	holder.addEventListener('click', e => {
 
 	e.preventDefault;
@@ -305,7 +290,12 @@ buttonHolderEl.forEach(holder => {
 		if (e.target.innerHTML == students[0 + k]['name']) {
 		k++;
 		score++;
+
+		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
+			buttonEl.setAttribute('disabled',true);
+		})
 		
+		renderStudents();
 		
 		// TODO
 		// Make a removeEventListener to remove target element parent
@@ -313,7 +303,12 @@ buttonHolderEl.forEach(holder => {
 		} else {
 
 		k++
+
+		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
+			buttonEl.setAttribute('disabled',true);
+		})
 		
+		renderStudents();
 		// TODO
 		// Make a removeEventListener to remove target element parent
 
@@ -322,9 +317,7 @@ buttonHolderEl.forEach(holder => {
 
 	}
 	
-		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
-			buttonEl.setAttribute('disabled',true);
-		})
+		
 	
 			//'button').setAttribute('disabled',true);
 
@@ -337,5 +330,12 @@ buttonHolderEl.forEach(holder => {
 	
  })
 } )
+	//}
+	//)
+
+};
+ // Calls the function to print ou students on cards
+renderStudents();
+
  
   
