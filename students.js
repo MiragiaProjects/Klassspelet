@@ -197,7 +197,6 @@ const shuffleArray = array => {
  // Suffling the student array
   shuffleArray(students);
   
-  //console.log(students);
 
   // Declared outside of loop so I can reach whats stored in a
   const aStudents = [];
@@ -210,7 +209,6 @@ const renderStudents = () => {
 	//students.forEach((student) => {
 		const tempArray = [];
 
-		//tempArray.push(student.name);
 
 		// the right answer gets saved in a
 		let a = students[k]['name'];
@@ -246,17 +244,9 @@ const renderStudents = () => {
 		// pushing in all the choises in an array
 		tempArray.push(a , b , c , d);
 
-		//console.log(tempArray);
 		// shuffling the 4 students som taht they dont end up on the same button
 		shuffleArray(tempArray);
 
-		//console.log(tempArray);
-
-			//testArray.push(students[Math.floor(Math.random() * (students.length - 0) ) + 0]['name']);
-			//console.log(a + " " + b + " " + c + " " + d);
-			
-			
-	
 		// Writing out the card with img and button with different names
 		cardHolderEl.innerHTML += `
 		<div class="col-md-6 col-lg-4">
@@ -299,7 +289,7 @@ const renderStudents = () => {
 		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
 			buttonEl.setAttribute('disabled',true);
 		})
-		
+
 		if (k == students.length) {
 			//alert("Du hade " + score + " rätt av " + k)
 			resultHolderEl.innerHTML += `
@@ -309,9 +299,6 @@ const renderStudents = () => {
 		  `
 		}
 		renderStudents();
-		
-		// TODO
-		// Make a removeEventListener to remove target element parent
 		
 		} else {
 
@@ -331,28 +318,14 @@ const renderStudents = () => {
 		  `
 		}
 		renderStudents();
-		// TODO
-		// Make a removeEventListener to remove target element parent
-
 
 		}
 
 	}
 	
-		
-	
-			//'button').setAttribute('disabled',true);
-
-	console.log(e.target.parentElement);
-
-	
-
-	
  })
 } )
-	//}
-	//)
-
+	
 };
  // Calls the function to print ou students on cards
 renderStudents();
