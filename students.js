@@ -1,6 +1,7 @@
 
 
 const cardHolderEl = document.querySelector("#cardHolder");
+const resultHolderEl = document.querySelector(".resultHolder");
 
 const students = [
 	{
@@ -266,10 +267,10 @@ const renderStudents = () => {
                 	<div class="card-body">
                     	<h5 class="card-title">Who dis?</h5>
 						<div class="buttonHolder">
-                    		<button type="button" class="btn btn-primary">${tempArray[0]}</button>
-                    		<button type="button" class="btn btn-primary">${tempArray[1]}</button>
-                    		<button type="button" class="btn btn-primary">${tempArray[2]}</button>
-                    		<button type="button" class="btn btn-primary">${tempArray[3]}</button>
+                    		<button type="button" class="btn ">${tempArray[0]}</button>
+                    		<button type="button" class="btn ">${tempArray[1]}</button>
+                    		<button type="button" class="btn ">${tempArray[2]}</button>
+                    		<button type="button" class="btn ">${tempArray[3]}</button>
 						</div>
             		</div>
         	</div>
@@ -277,7 +278,8 @@ const renderStudents = () => {
 		  `	
 
 		const buttonHolderEl = document.querySelectorAll('.buttonHolder');
-		const buttons = document.querySelectorAll('.btn');
+		const buttons = document.querySelectorAll('button');
+		
 
 		buttonHolderEl.forEach(holder => {
 	holder.addEventListener('click', e => {
@@ -286,15 +288,26 @@ const renderStudents = () => {
 
 	if (e.target.tagName == "BUTTON") {
 		
+		
 
 		if (e.target.innerHTML == students[0 + k]['name']) {
 		k++;
 		score++;
+			
+		e.target.classList.add('right');
 
 		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
 			buttonEl.setAttribute('disabled',true);
 		})
 		
+		if (k == students.length) {
+			//alert("Du hade " + score + " rätt av " + k)
+			resultHolderEl.innerHTML += `
+			<div class="alert alert-primary" role="alert">
+			Du hade ${score} rätt av ${k}!
+		  </div>
+		  `
+		}
 		renderStudents();
 		
 		// TODO
@@ -303,11 +316,20 @@ const renderStudents = () => {
 		} else {
 
 		k++
+		e.target.classList.add('wrong');
 
 		e.target.parentElement.querySelectorAll('button').forEach(buttonEl => {
 			buttonEl.setAttribute('disabled',true);
 		})
-		
+
+		if (k == students.length) {
+			//alert("Du hade " + score + " rätt av " + k)
+			resultHolderEl.innerHTML += `
+			<div class="alert alert-primary" role="alert">
+			Du hade ${score} rätt av ${k}!
+		  </div>
+		  `
+		}
 		renderStudents();
 		// TODO
 		// Make a removeEventListener to remove target element parent
@@ -323,9 +345,7 @@ const renderStudents = () => {
 
 	console.log(e.target.parentElement);
 
-	if (k == students.length) {
-		alert("Du hade " + score + " rätt av " + k)
-	}
+	
 
 	
  })

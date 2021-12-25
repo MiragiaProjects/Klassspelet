@@ -3,8 +3,21 @@
     opacity: 0.6;
 }
 
-button {
+.btn {
     margin: 5px;
+    background-color: #0d6efd;
+    color: white; 
+}
+
+.right{
+background-color: green;
+}
+.wrong{
+    background-color: red;
+}
+
+.alert-primary {
+    text-align: center;
 }
 
 
